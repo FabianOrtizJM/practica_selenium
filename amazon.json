@@ -1,0 +1,34 @@
+{
+    "website": "https://www.amazon.com.mx",
+    "search_input": "twotabsearchtextbox",
+    "search_terms": [
+        {
+            "term": "samsung smartphone",
+            "selectors": {
+                "container": "div.a-section.a-spacing-base",
+                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
+                "price_whole": "span.a-price-whole",
+                "price_fraction": "span.a-price-fraction"
+            }
+        },
+        {
+            "term": "iphone smartphone",
+            "selectors": {
+                "container": "div.a-section.a-spacing-base",
+                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
+                "price_whole": "span.a-price-whole",
+                "price_fraction": "span.a-price-fraction"
+            }
+        },
+        {
+            "term": "huawei smartphone",
+
+            "selectors": {
+                "container": "div.a-section.a-spacing-base",
+                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
+                "price_whole": "span.a-price-whole",
+                "price_fraction": "span.a-price-fraction"
+            }
+        }
+    ]
+}
