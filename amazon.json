@@ -1,34 +1,54 @@
 {
-    "website": "https://www.amazon.com.mx",
-    "search_input": "twotabsearchtextbox",
-    "search_terms": [
+    "start_url": "https://www.amazon.com.mx",
+    "actions": [
         {
-            "term": "samsung smartphone",
-            "selectors": {
-                "container": "div.a-section.a-spacing-base",
-                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
-                "price_whole": "span.a-price-whole",
-                "price_fraction": "span.a-price-fraction"
-            }
+            "action": "input",
+            "by": "ID",
+            "value": "twotabsearchtextbox",
+            "input_value": "samsung"
         },
         {
-            "term": "iphone smartphone",
-            "selectors": {
-                "container": "div.a-section.a-spacing-base",
-                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
-                "price_whole": "span.a-price-whole",
-                "price_fraction": "span.a-price-fraction"
-            }
+            "action": "wait",
+            "wait": 2
+        },
+                {
+            "action": "scroll"
         },
         {
-            "term": "huawei smartphone",
-
-            "selectors": {
-                "container": "div.a-section.a-spacing-base",
-                "title": "span.a-size-base-plus.a-color-base.a-text-normal",
-                "price_whole": "span.a-price-whole",
-                "price_fraction": "span.a-price-fraction"
-            }
+            "action": "find_elements",
+            "by": "CSS_SELECTOR",
+            "value": "div.a-section.a-spacing-base",
+            "actions": [
+                {
+                    "action": "get_element_text",
+                    "by": "CSS_SELECTOR",
+                    "value": "span.a-size-base-plus.a-color-base.a-text-normal",
+                    "save_as": "title"
+                },
+                {
+                    "action": "get_element_text",
+                    "by": "CSS_SELECTOR",
+                    "value": "span.a-price-whole",
+                    "save_as": "price_whole"
+                },
+                {
+                    "action": "get_element_text",
+                    "by": "CSS_SELECTOR",
+                    "value": "span.a-price-fraction",
+                    "save_as": "price_fraction"
+                },
+                {
+                    "action": "store_data",
+                    "data": {
+                        "Producto": "{title}",
+                        "Precio": "{price_whole}"
+                    }
+                }
+            ]
         }
-    ]
+    ],
+    "output": {
+        "filename": "productos_amazon.xlsx",
+        "columns": ["Producto", "Precio"]
+    }
 }

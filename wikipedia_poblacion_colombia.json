@@ -1,0 +1,45 @@
+{
+    "start_url": "https://es.wikipedia.org/wiki/Poblaci%C3%B3n_ind%C3%ADgena_de_Colombia",
+    "actions": [
+        {
+            "action": "wait",
+            "wait": 3
+        },
+        {
+            "action": "find_element",
+            "by": "CSS_SELECTOR",
+            "value": "div#mw-content-text > div > table.wikitable",
+            "actions": [
+                {
+                    "action": "find_elements",
+                    "by": "TAG_NAME",
+                    "value": "tr",
+                    "actions": [
+                        {
+                            "action": "find_elements",
+                            "by": "TAG_NAME",
+                            "value": "th",
+                            "save_as": "headers"
+                        },
+                        {
+                            "action": "find_elements",
+                            "by": "TAG_NAME",
+                            "value": "td",
+                            "actions": [
+                                {
+                                    "action": "get_element_text",
+                                    "by": "TAG_NAME",
+                                    "value": "td",
+                                    "save_as": "rows"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "output": {
+        "filename": "poblacion_indigena_colombia.xlsx"
+    }
+}

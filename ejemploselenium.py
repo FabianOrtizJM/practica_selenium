@@ -1,23 +1,25 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import json
+import time
 
-
-class ExtraccionProductos:
+class ejemploselenium:
     def __init__(self, config_file):
         self.driver = None
-        self.data = self.load_config(config_file)
-        self.products_data = []
+        self.config = self.load_config(config_file)
+        self.extracted_data = []
+        self.data_store = {}
 
-    def load_config(self, config_file):
+    @staticmethod
+    def load_config(config_file):
         with open(config_file, 'r') as file:
-            data = json.load(file)
-        return data
+            return json.load(file)
 
     def setup_driver(self):
         service = Service(ChromeDriverManager().install())
@@ -27,65 +29,98 @@ class ExtraccionProductos:
         if self.driver:
             self.driver.quit()
 
-    def buscar_extraer(self):
-        url = self.data['website']
-        self.driver.get(url)
-        time.sleep(3)
+    def execute_action(self, action):
+        if action['action'] == 'input':
+            element = self.find_element_with_wait(action['by'], action['value'])
+            element.clear()
+            element.send_keys(action['input_value'])
+            element.send_keys(Keys.RETURN)
 
-        for search_term_data in self.data['search_terms']:
-            search_term = search_term_data['term']
-            selectors = search_term_data['selectors']
+        elif action['action'] == 'click':
+            element = self.find_element_with_wait(action['by'], action['value'])
+            element.click()
 
-            search_bar = self.driver.find_element(By.ID, self.data['search_input'])
-            search_bar.clear()
-            search_bar.send_keys(search_term)
-            search_bar.send_keys(Keys.RETURN)
-            time.sleep(3)
+        elif action['action'] == 'scroll':
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)  # Ajusta el tiempo de espera según sea necesario
 
-            products = self.driver.find_elements(By.CSS_SELECTOR, selectors['container'])
-            for product in products:
+        elif action['action'] == 'wait':
+            time.sleep(action['wait'])
+
+        elif action['action'] == 'find_elements':
+            elements = self.find_elements_with_wait(action['by'], action['value'])
+            for element in elements:
                 try:
-                    product_title = product.find_element(By.CSS_SELECTOR, selectors['title']).text
-                    product_price = product.find_element(By.CSS_SELECTOR, selectors['price_whole']).text
-                    product_price_fraction = product.find_element(By.CSS_SELECTOR, selectors['price_fraction']).text
-                    price = product_price + '.' + product_price_fraction
-
-                    self.products_data.append([product_title, price])
+                    for sub_action in action['actions']:
+                        self.execute_sub_action(element, sub_action)
                 except Exception as e:
-                    continue
+                    print(f"Error executing sub_action on element: {element}, error: {e}")
 
-    def save_to_excel(self, file_path):
-        df = pd.DataFrame(self.products_data, columns=['Producto', 'Precio'])
-        df = df.sort_values(by='Precio', ascending=False)
-        df.to_excel(file_path, index=False)
+        elif action['action'] == 'find_element':
+            element = self.find_element_with_wait(action['by'], action['value'])
+            for sub_action in action['actions']:
+                self.execute_action_with_context(sub_action, element)
 
-        pd.set_option('display.max_rows', None)
-        pd.set_option('display.max_columns', None)
-        pd.set_option('display.width', None)
-        pd.set_option('display.max_colwidth', None)
+    def execute_action_with_context(self, action, context):
+        if action['action'] == 'find_elements':
+            elements = self.find_elements_with_wait(action['by'], action['value'], context=context)
+            for element in elements:
+                try:
+                    for sub_action in action['actions']:
+                        self.execute_sub_action(element, sub_action)
+                except Exception as e:
+                    print(f"Error executing sub_action on element: {element}, error: {e}")
 
-        print(df)
+    def execute_sub_action(self, element, sub_action):
+        try:
+            if sub_action['action'] == 'click':
+                sub_element = self.find_element_with_wait(sub_action['by'], sub_action['value'], element)
+                sub_element.click()
 
-        pd.reset_option('display.max_rows')
-        pd.reset_option('display.max_columns')
-        pd.reset_option('display.width')
-        pd.reset_option('display.max_colwidth')
+            elif sub_action['action'] == 'get_element_text':
+                sub_elements = element.find_elements(getattr(By, sub_action['by']), sub_action['value'])
+                texts = [sub_element.text for sub_element in sub_elements]
+                combined_text = ' '.join(texts)
+                self.data_store[sub_action['save_as']] = combined_text
 
+            elif sub_action['action'] == 'store_data':
+                data = {key: self.data_store.get(value.strip('{}'), '') for key, value in sub_action['data'].items()}
+                self.extracted_data.append(data)
+                print(f"Data stored: {data}")
+        except Exception as e:
+            print(f"Error executing sub_action: {sub_action}, error: {e}")
 
-def main():
-    config_file = 'amazon.json'
-    file_path = 'C:/Users/garfi/OneDrive/Escritorio/productos_amazon.xlsx'
+    def find_element_with_wait(self, by, value, context=None, timeout=10):
+        context = context or self.driver
+        return WebDriverWait(context, timeout).until(
+            EC.presence_of_element_located((getattr(By, by), value))
+        )
 
-    Extraer = ExtraccionProductos(config_file)
-    Extraer.setup_driver()
+    def find_elements_with_wait(self, by, value, context=None, timeout=10):
+        context = context or self.driver
+        return WebDriverWait(context, timeout).until(
+            EC.presence_of_all_elements_located((getattr(By, by), value))
+        )
 
-    try:
-        Extraer.buscar_extraer()
-    finally:
-        Extraer.close_driver()
+    def run(self):
+        self.setup_driver()
+        try:
+            self.driver.get(self.config['start_url'])
+            for action in self.config['actions']:
+                self.execute_action(action)
+        finally:
+            self.close_driver()
+            self.save_to_excel(self.config['output']['filename'])
 
-    Extraer.save_to_excel(file_path)
+    def save_to_excel(self, filename):
+        df = pd.DataFrame(self.extracted_data)
+        df.to_excel(filename, index=False)
 
+def main(config_file):
+    scraper = ejemploselenium(config_file)
+    scraper.run()
 
 if __name__ == "__main__":
-    main()
+    config_file = 'amazon.json'
+    #config_file = 'wikipedia_poblacion_colombia.json'
+    main(config_file)
