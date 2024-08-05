@@ -11,7 +11,7 @@
             "action": "wait",
             "wait": 2
         },
-                {
+        {
             "action": "scroll"
         },
         {
@@ -30,12 +30,6 @@
                     "by": "CSS_SELECTOR",
                     "value": "span.a-price-whole",
                     "save_as": "price_whole"
-                },
-                {
-                    "action": "get_element_text",
-                    "by": "CSS_SELECTOR",
-                    "value": "span.a-price-fraction",
-                    "save_as": "price_fraction"
                 },
                 {
                     "action": "store_data",

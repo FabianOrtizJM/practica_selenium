@@ -9,6 +9,7 @@ import pandas as pd
 import json
 import time
 
+
 class ejemploselenium:
     def __init__(self, config_file):
         self.driver = None
@@ -42,7 +43,7 @@ class ejemploselenium:
 
         elif action['action'] == 'scroll':
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(2)  # Ajusta el tiempo de espera según sea necesario
+            time.sleep(2)
 
         elif action['action'] == 'wait':
             time.sleep(action['wait'])
@@ -50,26 +51,23 @@ class ejemploselenium:
         elif action['action'] == 'find_elements':
             elements = self.find_elements_with_wait(action['by'], action['value'])
             for element in elements:
-                try:
-                    for sub_action in action['actions']:
-                        self.execute_sub_action(element, sub_action)
-                except Exception as e:
-                    print(f"Error executing sub_action on element: {element}, error: {e}")
+                for sub_action in action['actions']:
+                    self.execute_sub_action(element, sub_action)
 
-        elif action['action'] == 'find_element':
-            element = self.find_element_with_wait(action['by'], action['value'])
-            for sub_action in action['actions']:
-                self.execute_action_with_context(sub_action, element)
+        elif action['action'] == 'find_element_table':
+            table = self.find_element_with_wait(action['by'], action['value'])
+            rows = table.find_elements(By.TAG_NAME, 'tr')
 
-    def execute_action_with_context(self, action, context):
-        if action['action'] == 'find_elements':
-            elements = self.find_elements_with_wait(action['by'], action['value'], context=context)
-            for element in elements:
-                try:
-                    for sub_action in action['actions']:
-                        self.execute_sub_action(element, sub_action)
-                except Exception as e:
-                    print(f"Error executing sub_action on element: {element}, error: {e}")
+            headers = [header.text for header in
+                       rows[0].find_elements(By.TAG_NAME, self.config['actions'][2]['actions'][0]['value'])]
+            data = []
+            for row in rows[1:]:
+                cols = row.find_elements(By.TAG_NAME, self.config['actions'][2]['actions'][1]['value'])
+                cols = [col.text for col in cols]
+                data.append(cols)
+
+            self.data_store['headers'] = headers
+            self.data_store['data'] = data
 
     def execute_sub_action(self, element, sub_action):
         try:
@@ -86,9 +84,9 @@ class ejemploselenium:
             elif sub_action['action'] == 'store_data':
                 data = {key: self.data_store.get(value.strip('{}'), '') for key, value in sub_action['data'].items()}
                 self.extracted_data.append(data)
-                print(f"Data stored: {data}")
-        except Exception as e:
-            print(f"Error executing sub_action: {sub_action}, error: {e}")
+        finally:
+            pass
+
 
     def find_element_with_wait(self, by, value, context=None, timeout=10):
         context = context or self.driver
@@ -108,19 +106,30 @@ class ejemploselenium:
             self.driver.get(self.config['start_url'])
             for action in self.config['actions']:
                 self.execute_action(action)
+
+            if 'headers' in self.data_store and 'data' in self.data_store:
+                self.save_table_to_excel(self.config['output']['filename'], self.data_store['headers'],
+                                         self.data_store['data'])
+            else:
+                self.save_to_excel(self.config['output']['filename'], self.config['output']['columns'])
+
         finally:
             self.close_driver()
-            self.save_to_excel(self.config['output']['filename'])
 
-    def save_to_excel(self, filename):
-        df = pd.DataFrame(self.extracted_data)
+    def save_table_to_excel(self, filename, headers, data):
+        df = pd.DataFrame(data, columns=headers)
         df.to_excel(filename, index=False)
+
+    def save_to_excel(self, filename, columns):
+        df = pd.DataFrame(self.extracted_data, columns=columns)
+        df.to_excel(filename, index=False)
+
 
 def main(config_file):
     scraper = ejemploselenium(config_file)
     scraper.run()
 
+
 if __name__ == "__main__":
-    config_file = 'amazon.json'
-    #config_file = 'wikipedia_poblacion_colombia.json'
+    config_file = 'wikipedia_poblacion_mexico.json'  # Cambia esto según el archivo JSON que quieras usar
     main(config_file)

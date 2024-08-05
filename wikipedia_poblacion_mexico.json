@@ -1,5 +1,5 @@
 {
-    "start_url": "https://es.wikipedia.org/wiki/Poblaci%C3%B3n_ind%C3%ADgena_de_Colombia",
+    "start_url": "https://es.m.wikipedia.org/wiki/Pueblos_ind%C3%ADgenas_de_M%C3%A9xico",
     "actions": [
         {
             "action": "wait",
@@ -8,7 +8,7 @@
         {
             "action": "find_element_table",
             "by": "CSS_SELECTOR",
-            "value": "div#mw-content-text > div > table.wikitable"
+            "value": "table.sortable.striped.col3der.jquery-tablesorter"
         },
         {
             "action": "find_elements_table_rows",
@@ -31,6 +31,6 @@
         }
     ],
     "output": {
-        "filename": "poblacion_indigena_colombia.xlsx"
+        "filename": "poblacion_indigena_mexico.xlsx"
     }
 }
