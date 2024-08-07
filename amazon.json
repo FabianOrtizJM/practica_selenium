@@ -39,6 +39,44 @@
                     }
                 }
             ]
+        },
+        {
+            "action": "click",
+            "by": "CSS_SELECTOR",
+            "value": "#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.s-wide-grid-style.sg-row > div.sg-col-20-of-24.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(75) > div > div > span > a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator"
+        },
+        {
+            "action": "wait",
+            "wait": 3
+        },
+        {
+            "action": "scroll"
+        },
+        {
+            "action": "find_elements",
+            "by": "CSS_SELECTOR",
+            "value": "div.a-section.a-spacing-base",
+            "actions": [
+                {
+                    "action": "get_element_text",
+                    "by": "CSS_SELECTOR",
+                    "value": "span.a-size-base-plus.a-color-base.a-text-normal",
+                    "save_as": "title"
+                },
+                {
+                    "action": "get_element_text",
+                    "by": "CSS_SELECTOR",
+                    "value": "span.a-price-whole",
+                    "save_as": "price_whole"
+                },
+                {
+                    "action": "store_data",
+                    "data": {
+                        "Producto": "{title}",
+                        "Precio": "{price_whole}"
+                    }
+                }
+            ]
         }
     ],
     "output": {

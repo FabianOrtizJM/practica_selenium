@@ -131,5 +131,5 @@ def main(config_file):
 
 
 if __name__ == "__main__":
-    config_file = 'wikipedia_poblacion_mexico.json'  # Cambia esto según el archivo JSON que quieras usar
+    config_file = 'crypto.json'
     main(config_file)
