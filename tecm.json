@@ -1,0 +1,482 @@
+{
+  "start_url": "https://www.tecnm.mx/?vista=Asignaturas_test",
+  "actions": [
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(2) > div.col-5.mb-1.text-left > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(2) > div.col-5.mb-1.text-left > select > option:nth-child(5)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select > option:nth-child(2)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "find_elements",
+      "by": "CSS_SELECTOR",
+      "value": "div.row.mx-auto.border",
+      "actions": [
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(1) > div > div > div.col-12.px-4",
+          "save_as": "Programa Educativo"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(2) > div > div > div.col-12.px-4",
+          "save_as": "Asignatura"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(3) > div > div > div.col-12.px-4",
+          "save_as": "Tema"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(4) > div > div > div.col-12.px-4",
+          "save_as": "Sitio"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(5) > div > div > div.col-12.px-4",
+          "save_as": "Enlace directo de la práctica"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(6) > div > div > div.col-12.px-4",
+          "save_as": "Alcance"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(7) > div > div > div.col-12.px-4",
+          "save_as": "Observaciones"
+        },
+        {
+          "action": "store_data",
+          "data": {
+            "Programa Educativo": "{Programa Educativo}",
+            "Asignatura": "{Asignatura}",
+            "Tema": "{Tema}",
+            "Sitio": "{Sitio}",
+            "Enlace": "{Enlace directo de la práctica}",
+            "Alcance": "{Alcance}",
+            "Observaciones": "{Observaciones}"
+          }
+        }
+      ],
+      "output": {
+        "filename": "Asignatura1.xlsx",
+        "columns": [
+          "Programa Educativo",
+          "Asignatura",
+          "Tema",
+          "Sitio",
+          "Enlace",
+          "Alcance",
+          "Observaciones"
+        ]
+      }
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select > option:nth-child(6)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "find_elements",
+      "by": "CSS_SELECTOR",
+      "value": "div.row.mx-auto.border",
+      "actions": [
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(1) > div > div > div.col-12.px-4",
+          "save_as": "Programa Educativo"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(2) > div > div > div.col-12.px-4",
+          "save_as": "Asignatura"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(3) > div > div > div.col-12.px-4",
+          "save_as": "Tema"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(4) > div > div > div.col-12.px-4",
+          "save_as": "Sitio"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(5) > div > div > div.col-12.px-4",
+          "save_as": "Enlace directo de la práctica"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(6) > div > div > div.col-12.px-4",
+          "save_as": "Alcance"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(7) > div > div > div.col-12.px-4",
+          "save_as": "Observaciones"
+        },
+        {
+          "action": "store_data",
+          "data": {
+            "Programa Educativo": "{Programa Educativo}",
+            "Asignatura": "{Asignatura}",
+            "Tema": "{Tema}",
+            "Sitio": "{Sitio}",
+            "Enlace": "{Enlace directo de la práctica}",
+            "Alcance": "{Alcance}",
+            "Observaciones": "{Observaciones}"
+          }
+        }
+      ],
+      "output": {
+        "filename": "Asignatura2.xlsx",
+        "columns": [
+          "Programa Educativo",
+          "Asignatura",
+          "Tema",
+          "Sitio",
+          "Enlace",
+          "Alcance",
+          "Observaciones"
+        ]
+      }
+    },
+        {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select > option:nth-child(7)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "find_elements",
+      "by": "CSS_SELECTOR",
+      "value": "div.row.mx-auto.border",
+      "actions": [
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(1) > div > div > div.col-12.px-4",
+          "save_as": "Programa Educativo"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(2) > div > div > div.col-12.px-4",
+          "save_as": "Asignatura"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(3) > div > div > div.col-12.px-4",
+          "save_as": "Tema"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(4) > div > div > div.col-12.px-4",
+          "save_as": "Sitio"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(5) > div > div > div.col-12.px-4",
+          "save_as": "Enlace directo de la práctica"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(6) > div > div > div.col-12.px-4",
+          "save_as": "Alcance"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(7) > div > div > div.col-12.px-4",
+          "save_as": "Observaciones"
+        },
+        {
+          "action": "store_data",
+          "data": {
+            "Programa Educativo": "{Programa Educativo}",
+            "Asignatura": "{Asignatura}",
+            "Tema": "{Tema}",
+            "Sitio": "{Sitio}",
+            "Enlace": "{Enlace directo de la práctica}",
+            "Alcance": "{Alcance}",
+            "Observaciones": "{Observaciones}"
+          }
+        }
+      ],
+      "output": {
+        "filename": "Asignatura3.xlsx",
+        "columns": [
+          "Programa Educativo",
+          "Asignatura",
+          "Tema",
+          "Sitio",
+          "Enlace",
+          "Alcance",
+          "Observaciones"
+        ]
+      }
+    },
+        {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select > option:nth-child(8)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "find_elements",
+      "by": "CSS_SELECTOR",
+      "value": "div.row.mx-auto.border",
+      "actions": [
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(1) > div > div > div.col-12.px-4",
+          "save_as": "Programa Educativo"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(2) > div > div > div.col-12.px-4",
+          "save_as": "Asignatura"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(3) > div > div > div.col-12.px-4",
+          "save_as": "Tema"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(4) > div > div > div.col-12.px-4",
+          "save_as": "Sitio"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(5) > div > div > div.col-12.px-4",
+          "save_as": "Enlace directo de la práctica"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(6) > div > div > div.col-12.px-4",
+          "save_as": "Alcance"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(7) > div > div > div.col-12.px-4",
+          "save_as": "Observaciones"
+        },
+        {
+          "action": "store_data",
+          "data": {
+            "Programa Educativo": "{Programa Educativo}",
+            "Asignatura": "{Asignatura}",
+            "Tema": "{Tema}",
+            "Sitio": "{Sitio}",
+            "Enlace": "{Enlace directo de la práctica}",
+            "Alcance": "{Alcance}",
+            "Observaciones": "{Observaciones}"
+          }
+        }
+      ],
+      "output": {
+        "filename": "Asignatura4.xlsx",
+        "columns": [
+          "Programa Educativo",
+          "Asignatura",
+          "Tema",
+          "Sitio",
+          "Enlace",
+          "Alcance",
+          "Observaciones"
+        ]
+      }
+    },
+        {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select"
+    },
+    {
+      "action": "wait",
+      "wait": 2
+    },
+    {
+      "action": "click",
+      "by": "CSS_SELECTOR",
+      "value": "body > div.contenido > div.container-fluid.mx-auto.border.p-2 > form > div:nth-child(1) > div:nth-child(1) > select > option:nth-child(9)"
+    },
+    {
+      "action": "wait",
+      "wait": 5
+    },
+    {
+      "action": "find_elements",
+      "by": "CSS_SELECTOR",
+      "value": "div.row.mx-auto.border",
+      "actions": [
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(1) > div > div > div.col-12.px-4",
+          "save_as": "Programa Educativo"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(2) > div > div > div.col-12.px-4",
+          "save_as": "Asignatura"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(3) > div > div > div.col-12.px-4",
+          "save_as": "Tema"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(4) > div > div > div.col-12.px-4",
+          "save_as": "Sitio"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(5) > div > div > div.col-12.px-4",
+          "save_as": "Enlace directo de la práctica"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(6) > div > div > div.col-12.px-4",
+          "save_as": "Alcance"
+        },
+        {
+          "action": "get_element_text",
+          "by": "CSS_SELECTOR",
+          "value": "div:nth-child(7) > div > div > div.col-12.px-4",
+          "save_as": "Observaciones"
+        },
+        {
+          "action": "store_data",
+          "data": {
+            "Programa Educativo": "{Programa Educativo}",
+            "Asignatura": "{Asignatura}",
+            "Tema": "{Tema}",
+            "Sitio": "{Sitio}",
+            "Enlace": "{Enlace directo de la práctica}",
+            "Alcance": "{Alcance}",
+            "Observaciones": "{Observaciones}"
+          }
+        }
+      ],
+      "output": {
+        "filename": "Asignatura5.xlsx",
+        "columns": [
+          "Programa Educativo",
+          "Asignatura",
+          "Tema",
+          "Sitio",
+          "Enlace",
+          "Alcance",
+          "Observaciones"
+        ]
+      }
+    }
+  ]
+}

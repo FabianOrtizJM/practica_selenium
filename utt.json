@@ -1,0 +1,78 @@
+{
+    "start_url": "https://uttorreon.mx/",
+    "actions": [
+        {
+            "action": "input",
+            "by": "ID",
+            "value": "email",
+            "input_value": "garfiun18@gmail.com"
+        },
+        {
+            "action": "input",
+            "by": "ID",
+            "value": "password",
+            "input_value": "OIMJ020601HCLRRSA1"
+        },
+        {
+            "action": "click",
+            "by": "CSS_SELECTOR",
+            "value": "body > div > div.login-box.animated.fadeInDown > div.login-body > form > div:nth-child(5) > div > div > button"
+        },
+        {
+            "action": "wait",
+            "wait": 2
+        },
+        {
+            "action": "click",
+            "by": "CSS_SELECTOR",
+            "value": "#mCSB_1_container > ul > li.xn-openable > a"
+        },
+        {
+            "action": "wait",
+            "wait": 2
+        },
+        {
+            "action": "click",
+            "by": "CSS_SELECTOR",
+            "value": "#mCSB_1_container > ul > li.xn-openable > ul > li:nth-child(1) > a"
+        },
+        {
+            "action": "wait",
+            "wait": 2
+        },
+        {
+            "action": "click",
+            "by": "CSS_SELECTOR",
+            "value": "#mCSB_1_container > ul > li.xn-openable > ul > li:nth-child(1) > ul > li > a > span.item-text"
+
+        },
+              {
+            "action": "wait",
+            "wait": 5
+        },
+        {
+            "action": "find_element_table",
+            "by": "ID",
+            "value": "Tabla",
+            "actions": [
+              {
+                "action": "find_elements_table_columns",
+                "by": "TAG_NAME",
+                "value": "th",
+                "save_as": "headers"
+              },
+              {
+                    "action": "get_element_text_list",
+                    "by": "TAG_NAME",
+                    "value": "td",
+                    "save_as": "rows"
+              }
+            ]
+        },
+        {
+        "output": {
+        "filename": "calificaciones.xlsx"
+        }
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+{
+    "documentation": {
+        "start_url": {
+            "description": "La URL inicial a la que el navegador debe dirigirse para comenzar el proceso de scraping. Este es el punto de partida para todas las acciones subsiguientes."
+        },
+        "actions": {
+            "description": "Una lista ordenada de acciones que el script debe realizar en el sitio web. Cada acción es un objeto que contiene instrucciones específicas sobre cómo interactuar con los elementos de la página.",
+            "action": {
+                "description": "El tipo de acción que se realizará en un elemento web. Puede ser uno de los siguientes tipos:",
+                "types": [
+                    "'input': Para ingresar texto en un campo.",
+                    "'click': Para hacer clic en un botón o enlace.",
+                    "'scroll': Para desplazarse por la página.",
+                    "'wait': Para esperar un tiempo determinado antes de la siguiente acción.",
+                    "'find_elements': Para encontrar y extraer datos de múltiples elementos.",
+                    "'find_element_table': Para extraer datos de una tabla específica."
+                ]
+            },
+            "by": {
+                "description": "El método utilizado para ubicar el elemento en la página. Los métodos comunes incluyen:",
+                "types": [
+                    "'CSS_SELECTOR': Para seleccionar elementos usando selectores CSS.",
+                    "'ID': Para seleccionar un elemento por su atributo ID.",
+                    "'NAME': Para seleccionar un elemento por su atributo NAME.",
+                    "'XPATH': Para seleccionar un elemento usando una ruta XPath."
+                ]
+            },
+            "value": {
+                "description": "El selector o identificador específico del elemento en la página con el que se va a interactuar. Este valor debe coincidir con el método especificado en 'by'."
+            },
+            "input_value": {
+                "description": "El texto que se debe ingresar en un campo de entrada. Este atributo es específico para acciones de tipo 'input'."
+            },
+            "wait": {
+                "description": "El tiempo en segundos que el script debe esperar después de realizar la acción antes de proceder a la siguiente acción."
+            },
+            "output": {
+                "description": "Detalles sobre el archivo de salida que se generará después de completar todas las acciones. Incluye el nombre del archivo y las columnas a guardar.",
+                "filename": {
+                    "description": "El nombre del archivo Excel que se creará para almacenar los datos extraídos."
+                },
+                "columns": {
+                    "description": "Una lista de nombres de columnas que se utilizarán como encabezados en el archivo de salida. Estas columnas se extraen y almacenan en el archivo Excel especificado."
+                }
+            }
+        },
+        "sub_actions": {
+            "description": "Una lista de subacciones que se deben ejecutar dentro de una acción principal, como 'find_elements' o 'find_element_table'. Cada subacción describe interacciones adicionales con elementos hijos o relacionados dentro del contexto del elemento encontrado.",
+            "sub_action": {
+                "description": "El tipo de subacción que se realizará en un subelemento web. Puede ser uno de los siguientes tipos:",
+                "types": [
+                    "'click': Para hacer clic en un subelemento.",
+                    "'get_element_text': Para extraer el texto de un subelemento.",
+                    "'store_data': Para almacenar los datos extraídos en un formato estructurado.",
+                    "'find_elements_table_columns': Para extraer los encabezados de una tabla.",
+                    "'get_element_text_list': Para extraer texto de una lista de elementos en una tabla."
+                ]
+            },
+            "save_as": {
+                "description": "El nombre de la clave en el diccionario 'data_store' donde se almacenarán los datos extraídos o procesados."
+            },
+            "data": {
+                "description": "Un objeto que define los datos a almacenar en una acción 'store_data'. Cada par clave-valor indica cómo se debe almacenar el valor correspondiente en la columna del archivo de salida, utilizando valores almacenados previamente en 'data_store'."
+            }
+        }
+    }
+}

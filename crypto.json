@@ -8,12 +8,7 @@
         {
             "action": "find_element_table",
             "by": "CSS_SELECTOR",
-            "value": "#__next > div.css-bl4fde > div.chakra-container.css-p5b43h > div > div.css-latfv7 > div.css-1v8x7dw > table"
-        },
-        {
-            "action": "find_elements_table_rows",
-            "by": "TAG_NAME",
-            "value": "tr",
+            "value": "#__next > div.css-bl4fde > div.chakra-container.css-p5b43h > div > div.css-latfv7 > div.css-1v8x7dw > table",
             "actions": [
                 {
                     "action": "find_elements_table_columns",
@@ -28,9 +23,11 @@
                     "save_as": "rows"
                 }
             ]
+        },
+        {
+            "output": {
+                "filename": "crypto.xlsx"
+            }
         }
-    ],
-    "output": {
-        "filename": "crypto.xlsx"
-    }
+    ]
 }

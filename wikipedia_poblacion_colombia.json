@@ -8,12 +8,7 @@
         {
             "action": "find_element_table",
             "by": "CSS_SELECTOR",
-            "value": "div#mw-content-text > div > table.wikitable"
-        },
-        {
-            "action": "find_elements_table_rows",
-            "by": "TAG_NAME",
-            "value": "tr",
+            "value": "div#mw-content-text > div > table.wikitable",
             "actions": [
                 {
                     "action": "find_elements_table_columns",
@@ -28,9 +23,11 @@
                     "save_as": "rows"
                 }
             ]
+        },
+        {
+            "output": {
+            "filename": "poblacion_indigena_colombia.xlsx"
+            }
         }
-    ],
-    "output": {
-        "filename": "poblacion_indigena_colombia.xlsx"
-    }
+    ]
 }

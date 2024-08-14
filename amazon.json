@@ -8,6 +8,11 @@
             "input_value": "samsung"
         },
         {
+            "action": "click",
+            "by": "ID",
+            "value": "nav-search-submit-button"
+        },
+        {
             "action": "wait",
             "wait": 2
         },
@@ -77,10 +82,15 @@
                     }
                 }
             ]
-        }
-    ],
-    "output": {
-        "filename": "productos_amazon.xlsx",
-        "columns": ["Producto", "Precio"]
+        },
+        {
+            "output": {
+                "filename": "productos_amazon.xlsx",
+                "columns": [
+                    "Producto",
+                    "Precio"
+                ]
+            }
     }
+    ]
 }

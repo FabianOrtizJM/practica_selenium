@@ -35,7 +35,6 @@ class ejemploselenium:
             element = self.find_element_with_wait(action['by'], action['value'])
             element.clear()
             element.send_keys(action['input_value'])
-            element.send_keys(Keys.RETURN)
 
         elif action['action'] == 'click':
             element = self.find_element_with_wait(action['by'], action['value'])
@@ -56,18 +55,34 @@ class ejemploselenium:
 
         elif action['action'] == 'find_element_table':
             table = self.find_element_with_wait(action['by'], action['value'])
-            rows = table.find_elements(By.TAG_NAME, 'tr')
+            for sub_action in action['actions']:
+                if sub_action['action'] == 'find_elements_table_columns':
+                    headers = [header.text for header in table.find_elements(By.TAG_NAME, sub_action['value'])]
+                    self.data_store[sub_action['save_as']] = headers
+                elif sub_action['action'] == 'get_element_text_list':
+                    data = []
+                    rows = table.find_elements(By.TAG_NAME, 'tr')
+                    for row in rows[1:]:
+                        cols = row.find_elements(By.TAG_NAME, sub_action['value'])
+                        cols = [col.text for col in cols]
+                        data.append(cols)
+                    self.data_store[sub_action['save_as']] = data
 
-            headers = [header.text for header in
-                       rows[0].find_elements(By.TAG_NAME, self.config['actions'][2]['actions'][0]['value'])]
-            data = []
-            for row in rows[1:]:
-                cols = row.find_elements(By.TAG_NAME, self.config['actions'][2]['actions'][1]['value'])
-                cols = [col.text for col in cols]
-                data.append(cols)
+        if 'output' in action:
+            self.save_output(action['output'])
 
-            self.data_store['headers'] = headers
-            self.data_store['data'] = data
+    def save_output(self, output_config):
+        columns = output_config.get('columns')
+        if isinstance(columns, str):
+            columns = columns.split(', ')
+        filename = output_config['filename']
+        if self.extracted_data:
+            self.save_to_excel(filename, columns)
+            self.extracted_data = []
+        elif 'headers' in self.data_store and 'rows' in self.data_store:
+            self.save_table_to_excel(filename, self.data_store['headers'], self.data_store['rows'])
+        else:
+            print("No data to save en {filename}")
 
     def execute_sub_action(self, element, sub_action):
         try:
@@ -83,6 +98,7 @@ class ejemploselenium:
 
             elif sub_action['action'] == 'store_data':
                 data = {key: self.data_store.get(value.strip('{}'), '') for key, value in sub_action['data'].items()}
+                print(f"Storing data: {data}")  # Depura los datos que se van a almacenar
                 self.extracted_data.append(data)
         finally:
             pass
@@ -105,24 +121,34 @@ class ejemploselenium:
         try:
             self.driver.get(self.config['start_url'])
             for action in self.config['actions']:
-                self.execute_action(action)
-
-            if 'headers' in self.data_store and 'data' in self.data_store:
-                self.save_table_to_excel(self.config['output']['filename'], self.data_store['headers'],
-                                         self.data_store['data'])
-            else:
-                self.save_to_excel(self.config['output']['filename'], self.config['output']['columns'])
-
+                if 'action' in action:
+                    self.execute_action(action)
+                elif 'output' in action:
+                    self.save_output(action['output'])
         finally:
             self.close_driver()
 
     def save_table_to_excel(self, filename, headers, data):
-        df = pd.DataFrame(data, columns=headers)
+        print(f"Headers: {headers}")
+        for i, row in enumerate(data):
+            print(f"Row {i}: {row}")
+        adjusted_data = []
+        for row in data:
+            if len(row) == len(headers):
+                adjusted_data.append(row)
+            else:
+                adjusted_data.append(row + [''] * (len(headers) - len(row)))
+        df = pd.DataFrame(adjusted_data, columns=headers)
         df.to_excel(filename, index=False)
 
     def save_to_excel(self, filename, columns):
-        df = pd.DataFrame(self.extracted_data, columns=columns)
-        df.to_excel(filename, index=False)
+        if isinstance(columns, str):
+            columns = columns.split(', ')
+        if self.extracted_data:
+            print(f"Saving data {len(self.extracted_data)} records to {filename}")
+            df = pd.DataFrame(self.extracted_data, columns=columns)
+            print(f"Dataframe: {df}")
+            df.to_excel(filename, index=False)
 
 
 def main(config_file):
@@ -131,5 +157,5 @@ def main(config_file):
 
 
 if __name__ == "__main__":
-    config_file = 'crypto.json'
+    config_file = 'tecm.json'
     main(config_file)
