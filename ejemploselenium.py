@@ -157,5 +157,5 @@ def main(config_file):
 
 
 if __name__ == "__main__":
-    config_file = 'tecm.json'
+    config_file = 'utt.json'
     main(config_file)
